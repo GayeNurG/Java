@@ -1,0 +1,28 @@
+public class İkiliAgac {
+    public static class İkiliAgacDugumu {
+        public İkiliAgacDugumu sol;
+        public int veri;
+        public İkiliAgacDugumu sag;
+    }
+
+    public static İkiliAgacDugumu DugumOlustur(int veri) {
+        İkiliAgacDugumu dugum = new İkiliAgacDugumu();
+        dugum.veri = veri;
+        dugum.sol = null;
+        dugum.sag = null;
+        return dugum;
+
+    }
+
+
+    public static void main(String[] args) {
+        İkiliAgacDugumu kok = DugumOlustur(4);
+        kok.sol = DugumOlustur(6);
+        kok.sag = DugumOlustur(12);
+        kok.sol.sol = DugumOlustur(45);
+        kok.sag.sol = DugumOlustur(7);
+        kok.sag.sag = DugumOlustur(1);
+
+        System.out.println("Agac olusturuldu");
+    }
+}
