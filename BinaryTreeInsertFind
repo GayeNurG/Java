@@ -1,0 +1,151 @@
+class TreeNode{
+    public int data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+
+    public void display(){
+        System.out.println(" "+ data +" ");
+    }
+
+}
+
+class Tree{
+    private TreeNode root;
+
+    public Tree(){
+        root = null;
+    }
+
+    public TreeNode getRoot(){
+        return root;
+    }
+
+    public void preOrder(TreeNode localRoot){
+        if(localRoot != null) {
+            localRoot.display();
+            preOrder(localRoot.leftChild);
+            preOrder(localRoot.rightChild);
+        }
+    }
+
+    public void inOrder(TreeNode localRoot){
+        if(localRoot != null){
+            inOrder(localRoot.leftChild);
+            localRoot.display();
+            inOrder(localRoot.rightChild);
+        }
+    }
+
+    public void postOrder(TreeNode localRoot){
+        if(localRoot != null){
+            postOrder(localRoot.leftChild);
+            postOrder(localRoot.rightChild);
+            localRoot.display();
+        }
+    }
+
+    public void insert(int newData){
+        TreeNode newNode = new TreeNode();
+        newNode.data=newData;
+
+        if(root==null){
+            root=newNode;
+
+        }
+
+        else{
+            TreeNode current = root;
+            TreeNode parent;
+
+            while(true){
+                parent = current;
+
+                if(newData< current.data){
+                    current = current.leftChild;
+
+                    if(current == null){
+                        parent.leftChild=newNode;
+                        return;
+                    }
+                }
+                else{
+                    current=current.rightChild;
+
+                    if(current==null){
+                        parent.rightChild=newNode;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public TreeNode Bul(int data){
+        return Bul2(root,data);
+    }
+
+    public TreeNode Bul2(TreeNode root,int data){
+        if(root==null){
+            return null;
+        }
+
+        if(data==root.data){
+            return root;
+        }
+        else if(data< root.data){
+            return Bul2(root.leftChild,data);
+        }
+        else{
+            return Bul2(root.rightChild,data);
+        }
+
+    }
+
+    public TreeNode Min(){
+        if(root==null){
+            return null;
+        }
+        TreeNode p =root;
+        while(p.leftChild !=null){
+            p=p.leftChild;
+        }
+        return p;
+    }
+
+
+    public TreeNode Max(){
+        if(root==null){
+            return null;
+
+        }
+        TreeNode p=root;
+        while(p.leftChild!=null){
+            p=p.leftChild;
+        }
+        return p;
+    }
+
+}
+
+class Main{
+    public static void main(String[]args){
+        Tree theTree = new Tree();
+
+        theTree.insert(30);
+
+        System.out.println("preOrder");
+        theTree.preOrder(theTree.getRoot());
+
+        int aranandeger = 20;
+        TreeNode bulunandugum = theTree.Bul(aranandeger);
+
+        if(bulunandugum != null){
+            System.out.println("bulundu" + bulunandugum.data);
+        }
+
+        else{
+            System.out.println("bulunamadı" +aranandeger);
+        }
+
+    }
+}
